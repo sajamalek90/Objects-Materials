@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Objects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Objects</h1>
+        <nav>
+            <ul>
+                <li><h4><a href="#js-objects">Objects</a></h4></li>
+                <li><h4><a href="#notations">Notations</a></h4></li>
+                <li><h4><a href="#nested-obj">Nested Objects</a></h4></li>
+                <li><h4><a href="#new-keyword">New Keyword</a></h4></li>
+                <li><h4><a href="#this-keyword">This Keyword</a></h4></li>
+                <li><h4><a href="#create-method">Create Method</a></h4></li>
+                <li><h4><a href="#assign-method">Assign Method</a></h4></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- JavaScript Objects Section -->
+        <section id="js-objects">
+            <h2>JavaScript Objects</h2>
+
+            <!-- Object Introduction -->
+            <article>
+                <h3>Object Introduction</h3>
+                <p>Objects are one of the fundamental data types in JavaScript. An object is a collection of key-value pairs where keys are strings (or Symbols) and values can be any data type. Objects allow you to store related data and functionality together, making them essential for organizing complex code.</p>
+                <pre><code>// Creating an object using object literal notation
+const person = {
+    name: "John Doe",
+    age: 30,
+    city: "New York",
+    isStudent: false
+};
+
+console.log(person); // { name: "John Doe", age: 30, city: "New York", isStudent: false }
+
+// Objects can contain different data types
+const user = {
+    username: "john123",
+    email: "john@example.com",
+    age: 25,
+    hobbies: ["reading", "gaming", "coding"],
+    address: {
+        street: "123 Main St",
+        city: "Boston"
+    }
+};</code></pre>
+                <img src="https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2022_11_JavaScript-Objects-2.jpg" alt="JavaScript Objects Introduction">
+            </article>
+
+            <!-- Dot Notation vs Bracket Notation -->
+            <article id="notations">
+                <h3>Dot Notation vs. Bracket Notation</h3>
+                <p>There are two ways to access object properties: dot notation and bracket notation. Dot notation is cleaner and more commonly used, but bracket notation is necessary when property names contain spaces, start with numbers, or are stored in variables.</p>
+                <pre><code>const student = {
+    firstName: "Sarah",
+    lastName: "Johnson",
+    age: 22,
+    "favorite color": "blue",
+    "grade-level": "senior"
+};
+
+// Dot Notation - Clean and simple
+console.log(student.firstName);  // "Sarah"
+console.log(student.age);        // 22
+
+// Bracket Notation - Required for special property names
+console.log(student["favorite color"]);  // "blue"
+console.log(student["grade-level"]);     // "senior"
+
+// Bracket notation with variables
+const propertyName = "lastName";
+console.log(student[propertyName]);  // "Johnson"
+
+// Adding/Updating properties
+student.email = "sarah@example.com";  // Add new property with dot notation
+student["phone"] = "555-1234";        // Add new property with bracket notation
+
+// Updating existing properties
+student.age = 23;
+student["firstName"] = "Sarah Marie";
+
+console.log(student);</code></pre>
+                <img src="https://miro.medium.com/1*4ArCZQYVIH3SKAY0JzYpng.png" alt="Dot vs Bracket Notation">
+            </article>
+
+            <!-- Nested Objects -->
+            <article id="nested-obj">
+                <h3>Nested Objects and Advanced Examples</h3>
+                <p>Objects can contain other objects as properties, creating nested structures. This is useful for representing complex data like user profiles, company information, or configuration settings. You can access nested properties by chaining dot or bracket notation.</p>
+                <pre><code>// Complex nested object example
+const company = {
+    name: "Tech Solutions Inc",
+    founded: 2010,
+    address: {
+        street: "456 Innovation Drive",
+        city: "San Francisco",
+        state: "CA",
+        zipCode: "94102",
+        coordinates: {
+            latitude: 37.7749,
+            longitude: -122.4194
+        }
+    },
+    employees: [
+        {
+            id: 1,
+            name: "Alice Smith",
+            position: "CEO",
+            department: "Executive",
+            salary: 150000,
+            contact: {
+                email: "alice@techsolutions.com",
+                phone: "555-0001"
+            }
+        },
+        {
+            id: 2,
+            name: "Bob Jones",
+            position: "Lead Developer",
+            department: "Engineering",
+            salary: 120000,
+            contact: {
+                email: "bob@techsolutions.com",
+                phone: "555-0002"
+            }
+        }
+    ],
+    departments: {
+        engineering: {
+            name: "Engineering",
+            headCount: 25,
+            budget: 2000000
+        },
+        sales: {
+            name: "Sales",
+            headCount: 15,
+            budget: 1000000
+        }
+    }
+};
+
+// Accessing nested properties
+console.log(company.address.city);  // "San Francisco"
+console.log(company.address.coordinates.latitude);  // 37.7749
+console.log(company.employees[0].name);  // "Alice Smith"
+console.log(company.employees[1].contact.email);  // "bob@techsolutions.com"
+console.log(company.departments.engineering.headCount);  // 25
+
+// Using bracket notation for nested access
+console.log(company["employees"][0]["position"]);  // "CEO"</code></pre>
+                <img src="https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Figyirlabpsu6dnrkm2us.png" alt="Nested JavaScript Objects">
+            </article>
+
+            <!-- Create Object with New Keyword -->
+            <article id="new-keyword">
+                <h3>Create Object with New Keyword</h3>
+                <p>The <code>new Object()</code> syntax creates an empty object using JavaScript's built-in Object constructor. While this method works, object literal notation is generally preferred for its simplicity. However, understanding this approach is important for working with constructor functions and classes.</p>
+                <pre><code>// Creating object with new Object()
+const car = new Object();
+car.brand = "Toyota";
+car.model = "Camry";
+car.year = 2023;
+car.color = "Silver";
+car.start = function() {
+    console.log("Engine started!");
+};
+
+console.log(car);
+car.start();  // "Engine started!"
+
+// Constructor Function Pattern
+function Person(name, age, occupation) {
+    this.name = name;
+    this.age = age;
+    this.occupation = occupation;
+    this.introduce = function() {
+        console.log(`Hi, I'm ${this.name}, ${this.age} years old, and I work as a ${this.occupation}`);
+    };
+}
+
+// Creating instances with new keyword
+const person1 = new Person("Emily", 28, "Designer");
+const person2 = new Person("Michael", 35, "Engineer");
+
+person1.introduce();  // "Hi, I'm Emily, 28 years old, and I work as a Designer"
+person2.introduce();  // "Hi, I'm Michael, 35 years old, and I work as a Engineer"
+
+console.log(person1.name);  // "Emily"
+console.log(person2.occupation);  // "Engineer"
+
+// ES6 Class Syntax (Modern Approach)
+class Animal {
+    constructor(name, species, age) {
+        this.name = name;
+        this.species = species;
+        this.age = age;
+    }
+    
+    makeSound() {
+        console.log(`${this.name} makes a sound`);
+    }
+}
+
+const dog = new Animal("Buddy", "Dog", 3);
+dog.makeSound();  // "Buddy makes a sound"</code></pre>
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbmmhBcvV246UgdQdJND92ckTsN3g4dM_p2g&s" alt="JavaScript Object Constructor"> -->
+            </article>
+
+            <!-- This Keyword -->
+            <article id="this-keyword">
+                <h3>This Keyword</h3>
+                <p>The <code>this</code> keyword refers to the object that is executing the current function. In object methods, <code>this</code> refers to the object itself. Understanding <code>this</code> is crucial for working with object-oriented JavaScript and avoiding common pitfalls.</p>
+                <pre><code>// 'this' in object methods
+const calculator = {
+    value: 0,
+    add: function(num) {
+        this.value += num;
+        return this;  // Return this for method chaining
+    },
+    subtract: function(num) {
+        this.value -= num;
+        return this;
+    },
+    multiply: function(num) {
+        this.value *= num;
+        return this;
+    },
+    getResult: function() {
+        return this.value;
+    }
+};
+
+// Method chaining using 'this'
+calculator.add(10).multiply(2).subtract(5);
+console.log(calculator.getResult());  // 15
+
+// 'this' in different contexts
+const user = {
+    name: "David",
+    age: 30,
+    greet: function() {
+        console.log(`Hello, my name is ${this.name}`);
+    },
+    getBirthYear: function() {
+        return new Date().getFullYear() - this.age;
+    },
+    hobbies: ["reading", "gaming"],
+    showHobbies: function() {
+        console.log(`${this.name}'s hobbies:`);
+        this.hobbies.forEach(function(hobby) {
+            // 'this' is undefined here in regular function
+            console.log(hobby);
+        });
+    },
+    showHobbiesArrow: function() {
+        console.log(`${this.name}'s hobbies:`);
+        // Arrow functions inherit 'this' from parent scope
+        this.hobbies.forEach((hobby) => {
+            console.log(`${this.name} likes ${hobby}`);
+        });
+    }
+};
+
+user.greet();  // "Hello, my name is David"
+console.log(user.getBirthYear());  // 1995 (if current year is 2025)
+user.showHobbiesArrow();</code></pre>
+                <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ff9gr9tycbx8038l09ttx.png" alt="JavaScript This Keyword">
+            </article>
+
+            <!-- Create Object with Create Method -->
+            <article id="create-method">
+                <h3>Create Object with Create Method</h3>
+                <p>The <code>Object.create()</code> method creates a new object using an existing object as the prototype. This allows for prototypal inheritance, where new objects can inherit properties and methods from a parent object without using constructor functions or classes.</p>
+                <pre><code>// Basic Object.create() usage
+const personPrototype = {
+    greet: function() {
+        console.log(`Hello, I'm ${this.name}`);
+    },
+    getInfo: function() {
+        return `${this.name} is ${this.age} years old`;
+    }
+};
+
+// Create new object with personPrototype as prototype
+const john = Object.create(personPrototype);
+john.name = "John";
+john.age = 25;
+
+john.greet();  // "Hello, I'm John"
+console.log(john.getInfo());  // "John is 25 years old"
+
+// Create object with properties
+const jane = Object.create(personPrototype, {
+    name: {
+        value: "Jane",
+        writable: true,
+        enumerable: true
+    },
+    age: {
+        value: 30,
+        writable: true,
+        enumerable: true
+    },
+    occupation: {
+        value: "Developer",
+        writable: true,
+        enumerable: true
+    }
+});
+
+jane.greet();  // "Hello, I'm Jane"
+
+// Prototypal inheritance example
+const vehicle = {
+    type: "Vehicle",
+    start: function() {
+        console.log(`${this.brand} ${this.model} is starting...`);
+    },
+    stop: function() {
+        console.log(`${this.brand} ${this.model} has stopped.`);
+    }
+};
+
+const car = Object.create(vehicle);
+car.brand = "Honda";
+car.model = "Civic";
+car.wheels = 4;
+
+car.start();  // "Honda Civic is starting..."
+
+// Check prototype chain
+console.log(Object.getPrototypeOf(car) === vehicle);  // true</code></pre>
+                <!-- <img src="https://miro.medium.com/v2/resize:fit:1400/1*7X_vbxBuTYvxUm1-7bw4Vw.png" alt="Object.create() Method"> -->
+            </article>
+
+            <!-- Create Object with Assign Method -->
+            <article id="assign-method">
+                <h3>Create Object with Assign Method</h3>
+                <p>The <code>Object.assign()</code> method copies properties from one or more source objects to a target object. This is commonly used for merging objects, cloning objects, or adding properties to existing objects. It's particularly useful for creating new objects based on existing ones.</p>
+                <pre><code>// Basic Object.assign() - Copying properties
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+
+const result = Object.assign(target, source);
+console.log(result);  // { a: 1, b: 3, c: 4 }
+console.log(target);  // { a: 1, b: 3, c: 4 } - target is modified!
+
+// Creating new object (cloning)
+const original = {
+    name: "Original",
+    value: 100
+};
+
+const clone = Object.assign({}, original);
+console.log(clone);  // { name: "Original", value: 100 }
+
+// Merging multiple objects
+const defaults = {
+    theme: "light",
+    language: "en",
+    notifications: true
+};
+
+const userSettings = {
+    theme: "dark",
+    fontSize: 14
+};
+
+const finalSettings = Object.assign({}, defaults, userSettings);
+console.log(finalSettings);
+// { theme: "dark", language: "en", notifications: true, fontSize: 14 }
+
+// Practical example: Creating user profile
+const baseUser = {
+    role: "user",
+    active: true,
+    createdAt: new Date()
+};
+
+const userData = {
+    name: "Alex Johnson",
+    email: "alex@example.com",
+    age: 28
+};
+
+const permissions = {
+    canEdit: false,
+    canDelete: false,
+    canView: true
+};
+
+const fullUserProfile = Object.assign({}, baseUser, userData, permissions);
+console.log(fullUserProfile);
+
+// Note: Object.assign() performs shallow copy
+const obj1 = {
+    a: 1,
+    nested: { b: 2 }
+};
+
+const obj2 = Object.assign({}, obj1);
+obj2.nested.b = 999;
+console.log(obj1.nested.b);  // 999 - nested object is shared!
+
+// Alternative: Spread operator (ES6+)
+const obj3 = { x: 1, y: 2 };
+const obj4 = { y: 3, z: 4 };
+const merged = { ...obj3, ...obj4 };
+console.log(merged);  // { x: 1, y: 3, z: 4 }</code></pre>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*kP7TLg2V479pSItwwI_v_w.png" alt="Object.assign() Method">
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JavaScript Objects Lecture Materials. All rights reserved.</p>
+        <p>Powered by: <a href="https://www.linkedin.com/in/saja-malek/">Saja Malek</a></p>
+    </footer>
+</body>
+</html>
